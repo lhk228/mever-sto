@@ -11,13 +11,13 @@ $(document).on('click','.btn-change-mapview',function(){
 	if(mapDisplay == "none"){
 		mapView.show(); rankView.hide();
 		$("#BTN_MAPVIEW").hide();
-		$("#BTN_RANKVIEW").show();
+		$("#BTN_SEARCHVIEW").show();
 		kakaoItemMap(searchText);
 		
 	} else {
 		mapView.hide(); rankView.show();
 		$("#BTN_MAPVIEW").show();
-		$("#BTN_RANKVIEW").hide();
+		$("#BTN_SEARCHVIEW").hide();
 	}
 })
 
