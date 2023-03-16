@@ -77,7 +77,7 @@
 			<i id="BTN_FLOW_LEFT" class="fa-solid fa-arrow-left z-10"></i>
 			<div class="flow-bar-box">
 				<ul class="flow-bar-container">
-					<li class="flow-bar active"></li>
+					<li class="flow-bar"></li>
 					<li class="flow-bar"></li>
 					<li class="flow-bar"></li>
 					<li class="flow-bar"></li>
@@ -123,31 +123,9 @@
 </div>
 
 <script>
+//READY FUNCTION
 $(function(){
-	$(".flow-box").niceScroll({cursorwidth:'4px'});
-	
-	//상품 모집달성률
-	goalRateBarControl();
-
-	//플로우바 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
-	$(`.flow-bar`).click(function (){
-		$(".flow-bar").removeClass("selected");
-		$(this).toggleClass('selected');
-		$(`.flow-view-box`).fadeIn();
-		$(`.flow-list-container`).hide(0);
-	});
-
-	//플로우리스트 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
-	$(`.flow-list`).click(function (){ 
-		let listNum = $(this).index();
-		$(".flow-bar").eq(listNum).click();
-	})
-
-	 //닫기버튼 클릭 : 페이지 닫고 초기상태로
-	$(`.btn_close`).click(function(){
-		$(`.flow-view-box`).hide(0);
-		$(`.flow-list-container`).fadeIn();
-		$(".flow-bar").removeClass("selected");
-	});
+	goalRateBarControl(); //상품 모집달성률
+	// $(".flow-box").niceScroll({cursorwidth:'4px'});
 });
 </script>

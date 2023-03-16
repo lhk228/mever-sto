@@ -45,6 +45,7 @@ $(document).on('click','#BTN_FLOWCHART',function(){
 	}
 })
 
+//뒤로가기 클릭 : 플로우차트 닫고 상세설명페이지로
 $(document).on('click','#BTN_FLOW_LEFT',function(){
 	let flowBox		 = $(`.flow-box`);
 	let detailBox	 = $(`.detail-box`);
