@@ -90,7 +90,6 @@ position:relative;
 .detail-talk {
 	width:100%;
 	height:calc(100% - 140px);
-	display:none;
 }
 
 /* CHAT_DIALOGUE : 대화창 */
