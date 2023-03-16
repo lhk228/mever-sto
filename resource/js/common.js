@@ -280,7 +280,6 @@ function importScript(path)
 {
 	$(`script[src='${JS_PATH}${path}.js']`).remove();
 	$('body').append(`<script src='${JS_PATH}${path}.js'><\/script>`);
-	
 }
 
 //페이지 트랜지션

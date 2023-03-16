@@ -45,19 +45,6 @@ $(document).on('click','#BTN_FLOWCHART',function(){
 	}
 })
 
-//뒤로가기 클릭 : 플로우차트 닫고 상세설명페이지로
-$(document).on('click','#BTN_FLOW_LEFT',function(){
-	let flowBox		 = $(`.flow-box`);
-	let detailBox	 = $(`.detail-box`);
-	let flowDisplay = flowBox.css("display");
-
-	if(flowDisplay == "flex")
-	{
-		flowBox.hide(0);
-		detailBox.fadeIn();
-	}
-})
-
 //카카오맵
 function kakaoItemMap(address='강남대로 94길 34', itemName='상품명')
 {

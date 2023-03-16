@@ -183,7 +183,7 @@ position:relative;
 }
 
 .flow-bar-container {
-	width:5px;
+	width:8px;
 	left:50%;
 	transform: translateX(-50%);
 	background:linear-gradient(to top, #D700FF, #6f00ff);
@@ -195,10 +195,10 @@ position:relative;
 }
 
 .flow-bar {
-	width:100%;
-	height:calc(100% / 5);
+	width:8px;
+	height:0;
 	background:#72056d;
-	z-index:1;
+	z-index:10;
 	border-bottom:1px solid rgba(0, 0, 0, 0.315);
 	transition:.3s;
 	cursor:pointer;

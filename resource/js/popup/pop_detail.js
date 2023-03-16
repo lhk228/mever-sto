@@ -42,3 +42,23 @@ $(document).on('click','.btn_close',function(){
 	$(`.flow-list-container`).fadeIn();
 	$(".flow-bar").removeClass("selected");
 })
+
+//뒤로가기 클릭 : 플로우차트 닫고 상세설명페이지로
+$(document).on('click','#BTN_FLOW_LEFT',function(){
+	let flowBox		 	= $(`.flow-box`);
+	let detailBox	 	= $(`.detail-box`);
+	let flowDetail 	= $(`.flow-view-box`);
+	let flowDisplay = flowBox.css("display");
+	let detailDisplay = flowDetail.css("display");
+
+	
+	if(flowDisplay == "flex")
+	{
+		flowBox.hide(0);
+		detailBox.fadeIn();
+	}
+})
+
+$(document).on('click','#BTN_WRITE_FLOW',function(){
+	console.log('작성모드')
+})
