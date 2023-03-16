@@ -36,6 +36,49 @@ position:relative;
 .detail-header > .item-button { display:flex; align-items: center; justify-content: center; flex-flow:row wrap; height:100%; }
 .detail-header > .item-button button { width:100%; font-size:14px; }
 
+/* goal-rate : 모집달성률 */
+.goal-rate-box {
+	width:100%;
+	height:60px;
+	display:flex;
+	flex-flow:row wrap;
+	justify-content: center;
+	align-items: center;
+	padding:0 12px;
+}
+
+.goal-rate-container {
+	width:100%;
+	background:rgba(0,0,0,0.2);
+	border-radius:10px;
+	overflow: hidden;
+	display:flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.goal-rate-bar {
+	width:0%;
+	background:var(--magenta);
+	height:20px;
+}
+
+.goal-rate-text {
+	position:absolute;
+	color:#ccc;
+	font-size:12px;
+	left:50%;
+	transform: translateX(-50%);
+	bottom:1px;
+}
+
+
+.overoll-box {
+	width:100%;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	padding:20px 0;
+}
 /* 상세정보 - 플로우바 */
 #ITEM_PROGRESS { width:100%; height:40px; padding:0 12px; }
 

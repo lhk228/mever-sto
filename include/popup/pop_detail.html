@@ -11,7 +11,7 @@
 				<div class="item-detail" style="width:75%;">
 					<p class="item-title">상품명</p>
 					<p class="item-context">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, eum?</p>
-					<p class="item-price">500,00,000 원 (12,468 / 50,000)</p>
+					<p class="item-price">500,00,000 원</p>
 				</div>
 			</div>
 			<div id="ITEM_PROGRESS" class="detail-flow progress-container flex-row-center">
@@ -27,10 +27,14 @@
 			</div>
 			<div class="detail-main">
 				<!-- 모집달성률 -->
+				<div class="goal-rate-box">
+					<p style="font-size:12px;">모집현황</p>
+					<div class="goal-rate-container">
+						<div class="goal-rate-bar"></div>
+						<span class="goal-rate-text">0 / 50,000</span>
+					</div>
+				</div>
 				<!-- 투자 talk -->
-				<!-- 위치정보 -->
-				<!-- 투자기획/설명서 -->
-				<!-- 판매자정보 -->
 				<div class="detail-talk">
 					<p class="title flex-row-start">STO Talk</p>
 					<div id="CHAT_DIALOGUE" class="flex-row-center">
@@ -51,63 +55,71 @@
 						</div>
 					</div>
 				</div>
-
+				<!-- 위치정보 -->
+				<div class="detail-location overoll-box">
+					<button class="btn btn_magenta">위치정보</button>
+				</div>
+				<!-- 투자기획/설명서 -->
+				<div class="flow-box flex-column-start" style="display:none;">
+					<i id="BTN_FLOW_LEFT" class="fa-solid fa-arrow-left z-10"></i>
+					<div class="flow-bar-box">
+						<ul class="flow-bar-container">
+							<li class="flow-bar active"></li>
+							<li class="flow-bar"></li>
+							<li class="flow-bar"></li>
+							<li class="flow-bar"></li>
+							<li class="flow-bar"></li>
+							<li class="flow-bar"></li>
+						</ul>
+					</div>
+					<ul class="flow-list-container">
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+						<li class="flow-list">
+							<p class="title">Lorem, ipsum.</p>
+							<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+						</li>
+					</ul>
+					<div class="flow-view-box hidden">
+						<i class="fa-solid fa-xmark btn_close z-10"></i>
+						<p class="title">Lorem, ipsum.</p>
+						<p class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem ratione nisi, perspiciatis aperiam ab quod, sed quidem vitae autem minus facilis libero voluptates sequi dolore blanditiis sit dignissimos vero ducimus tempore sunt nulla unde architecto! Ipsum aperiam deserunt optio aut.</p>
+					</div>
+					<i id="BTN_WRITE_FLOW" class="fa-solid fa-pen-to-square"></i>
+				</div>
+				<!-- 판매자정보 -->
+				<div class="detail-seller overoll-box">
+					<button class="btn btn_magenta">판매자정보</button>
+				</div>
 			</div>
-
-		</div>		
-		
-		<!-- 보고용 flow box -->
-		<div class="flow-box flex-column-start" style="display:none;">
-			<i id="BTN_FLOW_LEFT" class="fa-solid fa-arrow-left z-10"></i>
-			<div class="flow-bar-box">
-				<ul class="flow-bar-container">
-					<li class="flow-bar active"></li>
-					<li class="flow-bar"></li>
-					<li class="flow-bar"></li>
-					<li class="flow-bar"></li>
-					<li class="flow-bar"></li>
-					<li class="flow-bar"></li>
-				</ul>
-			</div>
-			<ul class="flow-list-container">
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-				<li class="flow-list">
-					<p class="title">Lorem, ipsum.</p>
-					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
-			</ul>
-			<div class="flow-view-box hidden">
-				<i class="fa-solid fa-xmark btn_close z-10"></i>
-				<p class="title">Lorem, ipsum.</p>
-				<p class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem ratione nisi, perspiciatis aperiam ab quod, sed quidem vitae autem minus facilis libero voluptates sequi dolore blanditiis sit dignissimos vero ducimus tempore sunt nulla unde architecto! Ipsum aperiam deserunt optio aut.</p>
-			</div>
-			<i id="BTN_WRITE_FLOW" class="fa-solid fa-pen-to-square"></i>
 		</div>
 	</div>
 </div>
 
 <script>
-$(function(){	
+$(function(){
 	$(".flow-box").niceScroll({cursorwidth:'4px'});
+	
+	//상품 모집달성률
+	goalRateBarControl();
 
 	//플로우바 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
 	$(`.flow-bar`).click(function (){
