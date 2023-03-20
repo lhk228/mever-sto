@@ -265,11 +265,43 @@
 	</div>
 	<!-- page 3 -->
 	<div class="join-page justify-start" pageNum="3">
-		
+		<div class="input-box">
+			<p class="item-title">Nickname :</p>
+			<input type="text" placeholder="ex: buds11">
+			<button id="" class="btn btn_magenta">check</button>
+		</div>
+		<div class="input-box">
+			<p class="item-title">Id :</p>
+			<input type="text" placeholder="ex: buds001">
+			<button id="" class="btn btn_magenta">check</button>
+		</div>
+		<div class="input-box">
+			<p class="item-title">Email :</p>
+			<input type="email" placeholder="ex: buds@ex.kr">
+			<button id="" class="btn btn_magenta">check</button>
+		</div>
+		<div class="input-box ">
+			<p class="item-title">Password :</p>
+			<input type="password" placeholder="Enter password" id="pas1">
+			<button id="" class="btn btn_magenta dummyBtn" >check</button>
+		</div>
+		<div class="input-box">
+			<p class="item-title">Confirm pw :</p>
+			<input type="password" placeholder="Confirm password" id="pas2">
+			<button id="" class="btn btn_magenta dummyBtn" >check</button>
+		</div>
+		<div class="input-box">
+			<p class="dummyBtn">result</p>
+			<p id="result" ></p>
+		</div>
 	</div>
 	<!-- page 4 -->
-	<div class="join-page justify-start" pageNum="4">4</div>
-
+	<div class="join-page justify-start" pageNum="4">
+		<p style="text-align: center;" class="page-center">가입 성공적으로 완료되였습니다
+			<br><br>
+			<a  class="page-link" href="/mever-sto/index.html#/login">로그인</a> 
+		</p>
+	</div>
 	<div class="join-nav-area">
 		<button id="BTN_JOIN_PREV" class="btn btn_magenta h-full hidden">이전</button>
 		<button id="BTN_JOIN_NEXT" class="btn btn_magenta h-full">다음</button>
@@ -277,6 +309,9 @@
 </div>
 
 <script>
+	var pas1 = document.querySelector("#pas1")
+	var pas2 = document.querySelector("#pas2")
+	var result = document.querySelector("#result")
 $(function(){
 	
 	$(`.private-content`).niceScroll();
@@ -334,5 +369,7 @@ $(function(){
 		$(`.join-page[pageNum='${joinPhase}']`).addClass("selected");
 
 	})
+	pas1.addEventListener("keyup",checkPassword)
+	pas2.addEventListener("keyup", checkPassword)
 });
 </script>

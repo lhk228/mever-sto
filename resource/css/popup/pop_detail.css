@@ -236,3 +236,8 @@ position:relative;
 	height:100%;
 }
 
+
+
+/* LOCATION ADDED MAP */
+#MAP_COLL { width:100%; height:100%; }
+#DIV_COLL_LOCATION { height:200px; width:100%; display:none; }

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="resource/css/popup/pop_detail.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <div id="POPUP_DETAIL" class="popup absolute w-screen h-full flex flex-col items-center justify-start backdrop-blur-lg">
 	<div class="popup-header">
 		<i class="fa-solid fa-xmark btn_popup_close z-10"></i>
@@ -58,9 +59,13 @@
 					</div>
 				</div>
 				<!-- 위치정보 -->
-				<div class="detail-location overoll-box">
-					<button class="btn btn_magenta">위치정보</button>
-				</div>				
+				<div class="overoll-box">
+					<button id="BTN_COLLAPSE" class="btn btn_magenta" >위치정보</button>
+				</div>
+				<div id="DIV_COLL_LOCATION" class="detail-location">
+					<div id="MAP_COLL" class="kakaomap"></div>
+				  </div>				
+				
 				<!-- 투자기획/설명서 -->
 				<div class="detail-location overoll-box">
 					<button id="BTN_FLOWCHART" class="btn btn_magenta">진행보고</button>
@@ -68,7 +73,7 @@
 
 				<!-- 판매자정보 -->
 				<div class="detail-seller overoll-box">
-					<button class="btn btn_magenta">판매자정보</button>
+					<button id="BTN_COLLAPSE_3" class="btn btn_magenta">판매자정보</button>
 				</div>
 			</div>
 		</div>
@@ -85,6 +90,9 @@
 					<p class="title">Lorem, ipsum.</p>
 					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
 				</li>
+				<li class="flow-list" style="text-align: center">  
+					<button class="btn btn_magenta w-52 mt-4 text-sm" >+</button>
+				</li>
 			</ul>
 			<div class="flow-view-box hidden">
 				<i class="fa-solid fa-xmark btn_close z-10"></i>
@@ -96,11 +104,23 @@
   <!-- popup-main : 팝업 메인영역 END -->
 	</div>
 </div>
-
 <script>
 //READY FUNCTION
 $(function(){
 	goalRateBarControl(); //상품 모집달성률
+
+	var mapContainer = document.getElementById('MAP_COLL'), // 지도를 표시할 div 
+    mapOption = { 
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
+
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
 	// $(".flow-box").niceScroll({cursorwidth:'4px'});
 });
+
+
+
 </script>

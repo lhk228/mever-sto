@@ -11,3 +11,10 @@
 /* #JOIN_PAGE .pagebox */
 #JOIN_PAGE .pagebox input { width:calc(100% - 108px); height:100%; padding:8px; }
 #JOIN_PAGE .pagebox button { width:100px; margin-left:8px; height:100%; }
+
+.join-page > .input-box { width:100%; margin:4px; display:flex; justify-content: center; align-items: center; }
+.join-page > .input-box input { padding:4px; padding-left:8px}
+.item-title { width:100%; }
+.join-page > .input-box button {margin-left: 5px;}
+.dummyBtn { visibility: hidden; transition: 0s; }
+.page-center{text-align: center;}
