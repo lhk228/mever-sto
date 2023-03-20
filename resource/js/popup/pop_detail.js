@@ -47,7 +47,7 @@ $(document).on('click','.flow-bar',function(){
 })
 
 $(document).on('click','.flow-bar',function(){
-	if()
+
 	$(".flow-bar").removeClass("selected");
 	$(this).toggleClass('selected');
 	$(`.flow-view-box`).fadeIn().removeClass("hidden");
