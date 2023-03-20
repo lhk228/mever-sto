@@ -41,25 +41,68 @@ function goalRateBarControl(cnt = 12458, totalCnt = 50000)
 $(document).on('click','.flow-bar',function(){
 	$(".flow-bar").removeClass("selected");
 	$(this).toggleClass('selected');
-	$(`.flow-view-box`).fadeIn();
+	$(`.flow-view-box`).fadeIn().removeClass("hidden");
 	$(`.flow-list-container`).hide(0);
 	console.log("hi")
 })
 
-//플로우리스트 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
-$(document).on('click','.flow-list',function(){
-	console.log("list click")
-	let listNum = $(this).index();
-	$(".flow-bar").eq(listNum).click();
+$(document).on('click','.flow-bar',function(){
+	if()
+	$(".flow-bar").removeClass("selected");
+	$(this).toggleClass('selected');
+	$(`.flow-view-box`).fadeIn().removeClass("hidden");
+	$(`.flow-list-container`).hide(0);
+	console.log("hi")
 })
 
+
+
+
+
+
+
+//플로우리스트 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
+$(document).on('click','.flow-list',function(e){
+	let nodeName = e.target.nodeName;
+
+	switch(nodeName)
+	{
+		case "LI":
+			break;
+		case "BUTTON":
+			break;
+		default:break;
+	}
+
+	let listNum = $(this).index();
+	console.log("list click :",listNum);
+	listNum = 0;
+	$(".flow-bar").eq(listNum).click();
+});
+
+let g_save_flow_obj;
+//click ADD LIST BUTTON
+$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ initFlowChartWrite() });
+
+
+//click FLOW SAVE BUTTON
+$(document).on('click','#BTN_SAVE_FLOWCHART',function(){
+	flowChartClose();
+	let obj = makeFlowObejct();
+	let url = "/saveFlowPost";
+
+	console.log(`makeFlowObejct :`,obj);
+	
+	// g_save_flow_obj = obj;
+
+	makeFlowChartList(obj);
+	return;
+	api_post(url,obj);
+});
+
+
 //닫기버튼 클릭 : 페이지 닫고 초기상태로
-$(document).on('click','.btn_close',function(){
-	console.log('close')
-	$(`.flow-view-box`).hide(0);
-	$(`.flow-list-container`).fadeIn();
-	$(".flow-bar").removeClass("selected");
-})
+$(document).on('click','.btn_close',function(){flowChartClose()});
 
 //뒤로가기 클릭 : 플로우차트 닫고 상세설명페이지로
 $(document).on('click','#BTN_FLOW_LEFT',function(){
@@ -80,3 +123,42 @@ $(document).on('click','#BTN_FLOW_LEFT',function(){
 $(document).on('click','#BTN_WRITE_FLOW',function(){
 	console.log('작성모드')
 })
+
+
+//-- makeFlowChart input Object
+function makeFlowObejct()
+{
+	let title = $(`#TITLE_INPUT`).val();
+	let context = $(`#CONTEXT_INPUT`).val();
+	let obj = { title, context };
+
+	return obj;
+}
+
+//-- make flow list
+function makeFlowChartList(obj)
+{
+	let { title, context } = obj;
+	let li = 
+		`
+		<li class="flow-list">
+			<p class="title">${title}</p>
+			<p class="context">${context}</p>
+		</li>
+		`;
+	$(".flow-list-container").prepend(li);
+}
+
+//initFlowChartWrite
+function initFlowChartWrite()
+{
+	$('#TITLE_INPUT').val('');
+	$('#CONTEXT_INPUT').val('');
+}
+ 
+function flowChartClose(){
+	console.log('close');
+	$(`.flow-view-box`).hide(0);
+	$(`.flow-list-container`).fadeIn();
+	$(".flow-bar").removeClass("selected");
+}

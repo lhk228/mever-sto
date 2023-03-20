@@ -94,10 +94,10 @@ function api_post(url, data)
         case "assetpresell"					 : popupControl("HIDE"); break;				//분양신청
         case "mypreselllist"				 : MY_PRESELL = Items; makePresellListTable(Items); popupControl("HIDE");break;	//내 분양신청목록
         case "assetpresellmaxprice"	 : if(result.MaxPrice == 0){ result.MaxPrice = 50000 } PARENT.find("#INPUT_MAX_PRICE").val(numberWithCommas(result.MaxPrice));break;	//분양신청최고가 조회
-				case "phoneauthstart/notoken": PARENT.find("#BTN_PHONE_ACCESS").removeClass("disable"); customAlert("핸드폰 문자메세지를 확인해주세요");break; //문자 인증요청(첫회원가입)
-				case "phoneauthend/notoken"  : PARENT.find("#INPUT_PHONE_ACCESS").val("인증완료").attr("readonly",true); $("#BTN_PHONE_ACCESS").addClass('disable'); customAlert("문자인증 완료"); break; //문자 인증확인(첫회원가입)
-				case "phoneauthstart" 			 : customAlert("핸드폰 문자메세지를 확인해주세요");break; //문자 인증요청(회원정보 변경)
-				case "phoneauthend" 				 : customAlert("인증완료","핸드폰 번호가 변경되었습니다","ok",1000);  api_post("userinfo",{Token:TOKEN}); popupControl("HIDE");break; //문자 인증확인(회원정보변경)
+		case "phoneauthstart/notoken": PARENT.find("#BTN_PHONE_ACCESS").removeClass("disable"); customAlert("핸드폰 문자메세지를 확인해주세요");break; //문자 인증요청(첫회원가입)
+		case "phoneauthend/notoken"  : PARENT.find("#INPUT_PHONE_ACCESS").val("인증완료").attr("readonly",true); $("#BTN_PHONE_ACCESS").addClass('disable'); customAlert("문자인증 완료"); break; //문자 인증확인(첫회원가입)
+		case "phoneauthstart" 			 : customAlert("핸드폰 문자메세지를 확인해주세요");break; //문자 인증요청(회원정보 변경)
+		case "phoneauthend" 				 : customAlert("인증완료","핸드폰 번호가 변경되었습니다","ok",1000);  api_post("userinfo",{Token:TOKEN}); popupControl("HIDE");break; //문자 인증확인(회원정보변경)
         case "mailauthstart"				 : customAlert("인증코드가 발송되었습니다. <br>미수신시 스팸메일함을 확인해주세요");break; //이메일 인증요청
         case "mailauthend"					 : customAlert("이메일 변경완료"); api_post("userinfo",{Token:TOKEN});break; //이메일 인증확인(인증번호 입력 > 인증된 이메일로 갱신)
         case "editusernickname"			 : api_post("userinfo",{Token:TOKEN}); popupControl("HIDE"); break; 				 //닉네임 변경

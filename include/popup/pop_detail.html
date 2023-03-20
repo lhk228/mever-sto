@@ -86,24 +86,33 @@
 				</ul>
 			</div>
 			<ul class="flow-list-container">
-				<li class="flow-list">
+				<!-- <li class="flow-list">
 					<p class="title">Lorem, ipsum.</p>
 					<p class="context">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-				</li>
+				</li> -->
+				
 				<li class="flow-list" style="text-align: center">  
-					<button class="btn btn_magenta w-52 mt-4 text-sm" >+</button>
+					<button id="ADD_FLOW_LIST_BUTTON" class="btn btn_magenta w-52 mt-4 text-sm" >ADD</button>
 				</li>
 			</ul>
 			<div class="flow-view-box hidden">
 				<i class="fa-solid fa-xmark btn_close z-10"></i>
-				<p class="title">Lorem, ipsum.</p>
-				<p class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem ratione nisi, perspiciatis aperiam ab quod, sed quidem vitae autem minus facilis libero voluptates sequi dolore blanditiis sit dignissimos vero ducimus tempore sunt nulla unde architecto! Ipsum aperiam deserunt optio aut.</p>
+				<!-- change input -->
+				<p class="title">Title :</p>
+				<input id="TITLE_INPUT" type="text">
+				<p class="context">Context :</p>
+				<textarea name="" id="CONTEXT_INPUT" cols="30" rows="10"></textarea>
+				<!-- <p id="TITLE" class="title">Lorem, ipsum.qq</p> -->
+				<!-- <p id="CONTEXT" class="context">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem ratione nisi, perspiciatis aperiam ab quod, sed quidem vitae autem minus facilis libero voluptates sequi dolore blanditiis sit dignissimos vero ducimus tempore sunt nulla unde architecto! Ipsum aperiam deserunt optio aut.</p> -->
+				<br>
+				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
 			</div>
 			<i id="BTN_WRITE_FLOW" class="fa-solid fa-pen-to-square"></i>
 		</div>
   <!-- popup-main : 팝업 메인영역 END -->
 	</div>
 </div>
+
 <script>
 //READY FUNCTION
 $(function(){
@@ -118,9 +127,11 @@ $(function(){
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	// $(".flow-box").niceScroll({cursorwidth:'4px'});
-});
+	// $(".flow-box").niceScroll({cursorwidth:'4px'})
+	
+	$("").css({height:`calc(100% / ${count})`});
 
+});
 
 
 </script>
