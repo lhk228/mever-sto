@@ -40,13 +40,13 @@ function goalRateBarControl(cnt = 12458, totalCnt = 50000)
 //플로우바 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
 $(document).on('click','.flow-bar',function(){
 	var fileNameSplit = $('#FILE_UPLOAD').val().split('\\').pop();
-	if($('#TITLE_INPUT').val().length !==0 && $('#CONTEXT_INPUT').val().length !==0){
+	if($('#TITLE_INPUT').val().length !==0 && $('#CONTEXT_INPUT').text().length !==0){
 		$(".flow-bar").removeClass("selected");
 		$(this).toggleClass('selected');
 		$(`#READY_PAGE`).fadeIn().removeClass("hidden");
 		$(`.flow-list-container`).hide(0);
 		$(`#TITLE`).text($('#TITLE_INPUT').val());
-		$(`#CONTEXT`).text($('#CONTEXT_INPUT').val());
+		$(`#CONTEXT`).text($('#CONTEXT_INPUT').text());
 		$(`#UPLOAD_READY`).text(fileNameSplit);
 		
 		console.log("hi ready")
@@ -81,30 +81,15 @@ $(document).on('click','.flow-list',function(e){
 
 let g_save_flow_obj;
 //click ADD LIST BUTTON
-$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ 
-	// var fileInput = $('#FILE_UPLOAD');
-	// fileInput.val() === '';
-	// fileInput.val() === null
-	initFlowChartWrite()
+$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ return; initFlowChartWrite()});
 
-});
-
-// $(document).ready(function() {
-// 	$('#ADD_BIZ').on('click', function() {
-// 	  var fileInput = $('#FILE_UPLOAD');
-// 	  if (fileInput.val() === '' || fileInput.val() === null) {
-// 		alert('Please select a file!');
-// 		return false;
-// 	  }
-// 	});
-//   });
 
 //click FLOW SAVE BUTTON
 $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 	
 	let obj = makeFlowObejct();
 	let url = "/saveFlowPost";
-	if($('#TITLE_INPUT').val().length !== 0 && $('#CONTEXT_INPUT').val().length !== 0){
+	if($('#TITLE_INPUT').val().length !== 0 && $('#CONTEXT_INPUT').text().length !== 0){
 	flowChartClose();
 	// g_save_flow_obj = obj;
 	makeFlowChartList(obj);
@@ -119,10 +104,10 @@ $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 });
 // -- BTN_EDIT_FLOWCHART
 $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
-	var titleFlow =$("#TITLE").text();
+	var titleFlow =$("#TITLE").texts();
 	var contextFlow = $("#CONTEXT").text();
 	$("#EDIT_TITLE_INPUT").val(titleFlow);
-	$("#EDIT_CONTEXT_INPUT").val(contextFlow);
+	$("#EDIT_CONTEXT_INPUT").html(contextFlow);
 	$("#TITLE, #CONTEXT").hide();
 	$("#EDIT_TITLE_INPUT, #EDIT_CONTEXT_INPUT, #BTN_NEWSAVE_FLOWCHART").show();
 	$(this).hide();
@@ -130,13 +115,12 @@ $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
 
 $(document).on('click','#BTN_NEWSAVE_FLOWCHART',function(){
 	var editedTitle =$("#EDIT_TITLE_INPUT").val();
-	var editedContext =$("#EDIT_CONTEXT_INPUT").val()
+	var editedContext =$("#EDIT_CONTEXT_INPUT").html()
 	$("#TITLE").text(editedTitle);
 	$("#CONTEXT").text(editedContext);
 	$("#EDIT_TITLE_INPUT, #EDIT_CONTEXT_INPUT, #BTN_NEWSAVE_FLOWCHART").hide();
 	$("#TITLE, #CONTEXT").show();
 	$("#BTN_EDIT_FLOWCHART").show();
-	console.log(obj);
 });
 
 
@@ -182,7 +166,7 @@ function makeFlowChartList(obj)
 function initFlowChartWrite()
 {
 	$('#TITLE_INPUT').val('');
-	$('#CONTEXT_INPUT').val('');
+	$('#CONTEXT_INPUT').text('');
 	$('#UPLOAD_NAME').empty();
 	$('#IMAGE_PREVIEW').removeAttr("src");
 	$("#IMAGE_PREVIEW").removeClass("imgPreview")
@@ -204,7 +188,7 @@ function flowChartClose(){
 function makeFlowObejct()
 {
 	let title = $(`#TITLE_INPUT`).val();
-	let context = $(`#CONTEXT_INPUT`).val();
+	let context = $(`#CONTEXT_INPUT`).text();
 	let upload = $(`#FILE_UPLOAD`).val();
 	let obj = { title, context, upload };
 
@@ -215,7 +199,7 @@ function makeFlowObejct()
 function makeFlowObejct()
 {
 	let title = $(`#TITLE_INPUT`).val();
-	let context = $(`#CONTEXT_INPUT`).val();
+	let context = $(`#CONTEXT_INPUT`).text();
 	let upload = $(`#FILE_UPLOAD`).val();
 	let obj = { title, context, upload };
 

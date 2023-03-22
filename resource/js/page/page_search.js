@@ -32,8 +32,13 @@ $(document).on('click','#TABLE_SEARCH_TBODY .table_row',function(e){
 	if(e.target.nodeName != "I") popupControl('show',`${POPUP_PATH}/pop_detail.html`);
 })
 
-//진행보고서 클릭 : 플로우차트 보여준다
+//진행보고서 클릭 : 
 $(document).on('click','#BTN_FLOWCHART',function(){
+	showFlowChart();
+})
+// 플로우차트 보여준다
+function showFlowChart()
+{
 	let flowBox		 = $(`.flow-box`);
 	let detailBox	 = $(`.detail-box`);
 	let flowDisplay = flowBox.css("display");
@@ -43,7 +48,7 @@ $(document).on('click','#BTN_FLOWCHART',function(){
 		detailBox.hide(0);
 		flowBox.fadeIn();
 	}
-})
+}
 
 //카카오맵
 function kakaoItemMap(address='강남대로 94길 34', itemName='상품명')

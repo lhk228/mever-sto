@@ -95,23 +95,30 @@
 			<div id="INPUT_PAGE" class="flow-view-box hidden">
 				<i id="CLOSE_FLOW" class="fa-solid fa-xmark btn_close z-10"></i>
 				<!-- change input -->
-				<p class="title">Title :</p>
-				<input id="TITLE_INPUT" type="text">
+				<p class="title" style="padding: 4px;">Title :</p>
+				<input class="inputTitle" id="TITLE_INPUT" type="text">
 				<p class="context">Context :</p>
-				<div contenteditable="false"  id="CONTEXT_INPUT" class="contextInput">
-				</div>
-				<!-- <textarea name="" id="CONTEXT_INPUT" cols="15" rows="4"></textarea> -->
-				<br>
-				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name"  style="display: none;">
-				<div style="display: flex; align-items: end;">
-					<button id="BTN_FILE_UPLOAD" class="btn btn_white">UPLOAD</button>
-					<!-- SHOW IMG BOX -->
-
-					<div class="imgBox">
-						<img id="IMAGE_PREVIEW" src="" alt="">
+				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput">
+						<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
+				</div> 
+				<input type="file" id="IMG_UPLOAD" value="file name" placeholder="file name" accept="image/*" style="display: none;">
+				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp"  style="display: none;">
+			
+					<div class="inputBtnBox">
+						<button id="BTN_IMG_UPLOAD" class="btn btn_white">
+							Upload
+							<i class="fa-solid fa-image"></i>
+						</button>
+						<p id="UPLOAD_IMG_NAME"></p>
 					</div>
-					<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
-				</div>
+					<div class="inputBtnBox">
+						<button  id="BTN_FILE_UPLOAD" class="btn btn_white">
+							Upload
+							<i class="fa-solid fa-file"></i>
+						</button>
+						<p id="UPLOAD_FILE_NAME"></p>
+					</div>
+					
 				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
 			</div>
 
@@ -121,7 +128,9 @@
 				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
 				<p id="TITLE" class="title"></p>
 				<p id="CONTEXT" class="context"></p>
-				<textarea name="" id="EDIT_CONTEXT_INPUT" cols="30" rows="10" style="display: none;"></textarea>
+				<div contenteditable="true" id="EDIT_CONTEXT_INPUT" class="contextInput" style="display: none;">
+					<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
+				</div>
 				<div class="imgBox">
 					<img id="IMAGE_PREVIEW" src="" alt="">
 				</div>
@@ -141,32 +150,41 @@
 
 $(function() {
 	$(`#CONTEXT_INPUT`).click(function(){ $(this).attr("contenteditable",true); });
-	// click FILE INPUT	
-	$('#FILE_UPLOAD').change(function() {
-	  var upload_filename = $(this).val().split('\\').pop();
-	  $('#UPLOAD_NAME').text(upload_filename); 
-	  $("#IMAGE_PREVIEW").addClass("imgPreview")
+	// click IMG INPUT	
+	$('#IMG_UPLOAD').change(function() {
+	  var upload_imgName = $(this).val().split('\\').pop();
+	  $('#UPLOAD_IMG_NAME').text(upload_imgName); 
 	  $("#IMAGE_PREVIEW").removeClass("imgNone")
 	});
   });
+  	// click FILE INPUT	
+	$('#FILE_UPLOAD').change(function(){
+		var upload_fileName = $(this).val().split('\\').pop();
+		$('#UPLOAD_FILE_NAME').text(upload_fileName); 
+	})
   
 //READY PAGE FUNCTION
 $(function(){
 	
-	$("#BTN_FILE_UPLOAD").click(function(){
-		let inputFile = $("#FILE_UPLOAD");
-		inputFile.click();
+	$("#BTN_IMG_UPLOAD").click(function(){
+		let inputImg = $("#IMG_UPLOAD");
+		inputImg.click();
 	});
-
 		// IMG PREVIEW
-	$("#FILE_UPLOAD").on("change", function(){
+	$("#IMG_UPLOAD").on("change", function(){
 		var file = this.files[0];
 		var reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = function(e){
 			$("#IMAGE_PREVIEW").attr("src", e.target.result)
 		}
-	})
+	});
+
+	$("#BTN_FILE_UPLOAD").click(function(){
+		let inputFile = $("#FILE_UPLOAD");
+		inputFile.click();
+	});
+
 	
 
 
