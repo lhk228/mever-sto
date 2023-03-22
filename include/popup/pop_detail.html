@@ -98,22 +98,34 @@
 				<p class="title">Title :</p>
 				<input id="TITLE_INPUT" type="text">
 				<p class="context">Context :</p>
-				<textarea name="" id="CONTEXT_INPUT" cols="30" rows="10"></textarea>
+				<div contenteditable="false"  id="CONTEXT_INPUT" class="contextInput">
+				</div>
+				<!-- <textarea name="" id="CONTEXT_INPUT" cols="15" rows="4"></textarea> -->
 				<br>
-				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" style="display: none;">
-				<div style="display: flex; align-items: center">
+				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name"  style="display: none;">
+				<div style="display: flex; align-items: end;">
 					<button id="BTN_FILE_UPLOAD" class="btn btn_white">UPLOAD</button>
+					<!-- SHOW IMG BOX -->
+
+					<div class="imgBox">
+						<img id="IMAGE_PREVIEW" src="" alt="">
+					</div>
 					<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
 				</div>
 				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
 			</div>
-			<!-- Ready Page -->
+
+			<!--READY PAGE -->
 			<div id="READY_PAGE" class="flow-view-box hidden">
 				<i class="fa-solid fa-xmark btn_close z-10"></i>
-				<p id="TITLE" class="title"></p>
 				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
+				<p id="TITLE" class="title"></p>
 				<p id="CONTEXT" class="context"></p>
 				<textarea name="" id="EDIT_CONTEXT_INPUT" cols="30" rows="10" style="display: none;"></textarea>
+				<div class="imgBox">
+					<img id="IMAGE_PREVIEW" src="" alt="">
+				</div>
+				<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
 				<p id="UPLOAD_READY" class="context"></p>
 				<button id="BTN_EDIT_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Edit</button>
 				<button id="BTN_NEWSAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display: none;">Save</button>
@@ -126,13 +138,15 @@
 </div>
 
 <script>
-	
 
-// click FILE INPUT
-$(document).ready(function() {
+$(function() {
+	$(`#CONTEXT_INPUT`).click(function(){ $(this).attr("contenteditable",true); });
+	// click FILE INPUT	
 	$('#FILE_UPLOAD').change(function() {
-	  var upload_filename = $(this).val().split('\\').pop(); 
+	  var upload_filename = $(this).val().split('\\').pop();
 	  $('#UPLOAD_NAME').text(upload_filename); 
+	  $("#IMAGE_PREVIEW").addClass("imgPreview")
+	  $("#IMAGE_PREVIEW").removeClass("imgNone")
 	});
   });
   
@@ -142,8 +156,20 @@ $(function(){
 	$("#BTN_FILE_UPLOAD").click(function(){
 		let inputFile = $("#FILE_UPLOAD");
 		inputFile.click();
-		console.log(inputFile.val());
 	});
+
+		// IMG PREVIEW
+	$("#FILE_UPLOAD").on("change", function(){
+		var file = this.files[0];
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(e){
+			$("#IMAGE_PREVIEW").attr("src", e.target.result)
+		}
+	})
+	
+
+
 	goalRateBarControl(); //상품 모집달성률
 
 	var mapContainer = document.getElementById('MAP_COLL'), // 지도를 표시할 div 

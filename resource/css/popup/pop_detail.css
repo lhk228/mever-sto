@@ -241,3 +241,40 @@ position:relative;
 /* LOCATION ADDED MAP */
 #MAP_COLL { width:100%; height:100%; }
 #DIV_COLL_LOCATION { height:200px; width:100%; display:none; }
+
+/* IMG BOX */
+.imgBox {
+	height: 120px; 
+	width: 120px; 
+	margin-left: 20px;
+}
+
+/* IMG PREVIEW */
+.imgPreview {
+	width: 100%; 
+	height: 100%; 
+	object-fit: cover;
+}
+.imgNone {
+	display: none;
+}
+
+/* CONTEXT INPUT */
+.contextInput {
+	background: #372b63;
+    border-radius: 5px;
+	outline:none;
+	padding:8px;
+	width:calc(100% - 8px);
+	color:#fff;
+	height:200px;
+	pointer-events: auto;
+}
+
+
+.contextInput p::before {
+	content: '\201C';
+}
+.contextInput p::after {
+    content: '\201D';
+}

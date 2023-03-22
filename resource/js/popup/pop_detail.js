@@ -48,6 +48,7 @@ $(document).on('click','.flow-bar',function(){
 		$(`#TITLE`).text($('#TITLE_INPUT').val());
 		$(`#CONTEXT`).text($('#CONTEXT_INPUT').val());
 		$(`#UPLOAD_READY`).text(fileNameSplit);
+		
 		console.log("hi ready")
 	}else{
 		$(".flow-bar").removeClass("selected");
@@ -80,7 +81,23 @@ $(document).on('click','.flow-list',function(e){
 
 let g_save_flow_obj;
 //click ADD LIST BUTTON
-$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ initFlowChartWrite() });
+$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ 
+	// var fileInput = $('#FILE_UPLOAD');
+	// fileInput.val() === '';
+	// fileInput.val() === null
+	initFlowChartWrite()
+
+});
+
+// $(document).ready(function() {
+// 	$('#ADD_BIZ').on('click', function() {
+// 	  var fileInput = $('#FILE_UPLOAD');
+// 	  if (fileInput.val() === '' || fileInput.val() === null) {
+// 		alert('Please select a file!');
+// 		return false;
+// 	  }
+// 	});
+//   });
 
 //click FLOW SAVE BUTTON
 $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
@@ -119,7 +136,7 @@ $(document).on('click','#BTN_NEWSAVE_FLOWCHART',function(){
 	$("#EDIT_TITLE_INPUT, #EDIT_CONTEXT_INPUT, #BTN_NEWSAVE_FLOWCHART").hide();
 	$("#TITLE, #CONTEXT").show();
 	$("#BTN_EDIT_FLOWCHART").show();
-	console.log();
+	console.log(obj);
 });
 
 
@@ -166,6 +183,14 @@ function initFlowChartWrite()
 {
 	$('#TITLE_INPUT').val('');
 	$('#CONTEXT_INPUT').val('');
+	$('#UPLOAD_NAME').empty();
+	$('#IMAGE_PREVIEW').removeAttr("src");
+	$("#IMAGE_PREVIEW").removeClass("imgPreview")
+	$("#IMAGE_PREVIEW").addClass("imgNone")
+
+	console.log('add new item');
+
+	
 }
  
 function flowChartClose(){
@@ -176,6 +201,17 @@ function flowChartClose(){
 }
 
 //-- makeFlowChart input Object
+function makeFlowObejct()
+{
+	let title = $(`#TITLE_INPUT`).val();
+	let context = $(`#CONTEXT_INPUT`).val();
+	let upload = $(`#FILE_UPLOAD`).val();
+	let obj = { title, context, upload };
+
+	return obj;
+}
+
+//-- makeEditedFlowChart input Object
 function makeFlowObejct()
 {
 	let title = $(`#TITLE_INPUT`).val();
