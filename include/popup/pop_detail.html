@@ -94,12 +94,14 @@
 
 			<div id="INPUT_PAGE" class="flow-view-box hidden">
 				<i id="CLOSE_FLOW" class="fa-solid fa-xmark btn_close z-10"></i>
-				<!-- change input -->
-				<p class="title" style="padding: 4px;">Title :</p>
-				<input class="inputTitle" id="TITLE_INPUT" type="text">
+				<!-- INPUT PAGE -->
+				<p class="titleText title " >Title :</p>
+				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off">
 				<p class="context">Context :</p>
 				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput">
-						<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
+					<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
+					<iframe id="CONTEXT_VIDEO" class="imgNone" width="60%" height="30%" src="" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+	
 				</div> 
 				<input type="file" id="IMG_UPLOAD" value="file name" placeholder="file name" accept="image/*" style="display: none;">
 				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp"  style="display: none;">
@@ -116,18 +118,26 @@
 							Upload
 							<i class="fa-solid fa-file"></i>
 						</button>
+						
 						<p id="UPLOAD_FILE_NAME"></p>
 					</div>
-					
+					<div class="inputBtnBox">
+						<button  id="BTN_VIDEO_UPLOAD" class="btn btn_white">
+							Upload
+							<i class="fa-sharp fa-solid fa-photo-film"></i>
+						</button>
+						<input id="INPUT_VIDEO" class="videoInput" type="text" placeholder="https://www.youtube.com">
+					</div>
 				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
 			</div>
 
 			<!--READY PAGE -->
+
 			<div id="READY_PAGE" class="flow-view-box hidden">
 				<i class="fa-solid fa-xmark btn_close z-10"></i>
 				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
 				<p id="TITLE" class="title"></p>
-				<p id="CONTEXT" class="context"></p>
+				<div id="CONTEXT" class="contextInput"></div>
 				<div contenteditable="true" id="EDIT_CONTEXT_INPUT" class="contextInput" style="display: none;">
 					<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
 				</div>
@@ -162,14 +172,34 @@ $(function() {
 		var upload_fileName = $(this).val().split('\\').pop();
 		$('#UPLOAD_FILE_NAME').text(upload_fileName); 
 	})
+
+	// click FILE DOWNLOAD
+	$(function(){
+		$("#BTN_FILE_DOWNLOAD").click(function(){
+			var url = URL.createObjectURL($("#FILE_UPLOAD")[0].files[0]);
+			var a = $("<a>").attr("href", url).attr("download", "file.pdf file.doc file.xls file.hwp").appendTo("body");
+			a[0].click();
+			a.remove()
+		})
+	})
   
-//READY PAGE FUNCTION
+//INPUT PAGE FUNCTION
 $(function(){
 	
 	$("#BTN_IMG_UPLOAD").click(function(){
 		let inputImg = $("#IMG_UPLOAD");
 		inputImg.click();
 	});
+// click VIDEO UPLOAD
+	$("#BTN_VIDEO_UPLOAD").click(function(){
+		var vid = $("#INPUT_VIDEO").val()
+		$("#CONTEXT_VIDEO").removeClass("imgNone")
+		$("#CONTEXT_VIDEO").attr("src", vid)
+		console.log(vid);
+
+	})
+
+
 		// IMG PREVIEW
 	$("#IMG_UPLOAD").on("change", function(){
 		var file = this.files[0];

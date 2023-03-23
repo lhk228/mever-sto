@@ -243,8 +243,14 @@ position:relative;
 #DIV_COLL_LOCATION { height:200px; width:100%; display:none; }
 
 /* TITLE INPUT  */
+.titleText {
+	padding: 4px; 
+	margin-bottom: 0px;
+}
 .inputTitle {
 	margin-bottom: 1rem;
+	padding: 6px 10px;
+
 }
 
 
@@ -261,8 +267,11 @@ position:relative;
 	padding:8px;
 	width:calc(100% - 8px);
 	color:#fff;
-	height:200px;
+	height:400px;
 	overflow-y:scroll;
+}
+.contextInput:focus{
+	border:1px solid #994bff;
 }
 
 [contenteditable='true'] {
@@ -270,8 +279,9 @@ position:relative;
 }
 /* CONTEXT IMG */
  .contextImg {
-	height: 40%; 
+	height: 25%; 
 	width: auto;
+	margin: 5px;
  }
 
  /* INPUT BTN BOX */
@@ -284,6 +294,13 @@ position:relative;
 
  .inputBtnBox p {
 	font-size: 9px;
-	/* max-width: 20px; */
 	margin-left: 20px;
+ }
+
+ /*VIDEO INPUT  */
+
+ .videoInput {
+	margin-left: 10px;
+	font-size: 12px;
+	padding: 8px 10px;
  }

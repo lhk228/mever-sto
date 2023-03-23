@@ -104,7 +104,7 @@ $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 });
 // -- BTN_EDIT_FLOWCHART
 $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
-	var titleFlow =$("#TITLE").texts();
+	var titleFlow =$("#TITLE").text();
 	var contextFlow = $("#CONTEXT").text();
 	$("#EDIT_TITLE_INPUT").val(titleFlow);
 	$("#EDIT_CONTEXT_INPUT").html(contextFlow);
