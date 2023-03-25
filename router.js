@@ -16,6 +16,9 @@ var app = Sammy(function () {
 
 	//랭킹
 	this.get("#/rank", function () { pageTransition(`${PAGE_PATH}rank.html`); });
+
+	//원페이지 발행서비스
+	this.get("#/marketing", function () { pageTransition(`${PAGE_PATH}marketing.html`); });
 	
 	//404
 	this.notFound = function (verb, path) { $("#PAGE_VIEW").html("404, 페이지 못찾음"); };
