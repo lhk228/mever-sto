@@ -99,10 +99,9 @@
 				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off">
 				<p class="context">Context :</p>
 				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput">
-					<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
-					<iframe id="CONTEXT_VIDEO" class="imgNone" width="60%" height="30%" src="" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	
+					
 				</div> 
+
 				<input type="file" id="IMG_UPLOAD" value="file name" placeholder="file name" accept="image/*" style="display: none;">
 				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp"  style="display: none;">
 			
@@ -128,21 +127,28 @@
 						</button>
 						<input id="INPUT_VIDEO" class="videoInput" type="text" placeholder="https://www.youtube.com">
 					</div>
+					<p id="IMG_ARRAY_TEXT" style="display: none;"></p>
+					<p id="VIDEO_ARRAY_TEXT" style="display: none;"></p>
 				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
+				
 			</div>
+
+			
+
+
 
 			<!--READY PAGE -->
 
 			<div id="READY_PAGE" class="flow-view-box hidden">
-				<i class="fa-solid fa-xmark btn_close z-10"></i>
+			
+				<i id="BTN_CLOSE_READY" class="fa-solid fa-xmark btn_close z-10"></i>
+				
 				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
 				<p id="TITLE" class="title"></p>
-				<div id="CONTEXT" class="contextInput"></div>
-				<div contenteditable="true" id="EDIT_CONTEXT_INPUT" class="contextInput" style="display: none;">
-					<img class="contextImg imgNone" id="IMAGE_PREVIEW" src="" alt="">
-				</div>
+				<div contenteditable="true"  id="CONTEXT" class="contextInput"></div>
+				
 				<div class="imgBox">
-					<img id="IMAGE_PREVIEW" src="" alt="">
+					<!-- <img id="IMAGE_PREVIEW" src="" alt=""> -->
 				</div>
 				<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
 				<p id="UPLOAD_READY" class="context"></p>
@@ -159,63 +165,69 @@
 <script>
 
 $(function() {
-	$(`#CONTEXT_INPUT`).click(function(){ $(this).attr("contenteditable",true); });
-	// click IMG INPUT	
-	$('#IMG_UPLOAD').change(function() {
-	  var upload_imgName = $(this).val().split('\\').pop();
-	  $('#UPLOAD_IMG_NAME').text(upload_imgName); 
-	  $("#IMAGE_PREVIEW").removeClass("imgNone")
-	});
-  });
-  	// click FILE INPUT	
+	// click FILE INPUT	
 	$('#FILE_UPLOAD').change(function(){
 		var upload_fileName = $(this).val().split('\\').pop();
 		$('#UPLOAD_FILE_NAME').text(upload_fileName); 
 	})
 
 	// click FILE DOWNLOAD
-	$(function(){
-		$("#BTN_FILE_DOWNLOAD").click(function(){
-			var url = URL.createObjectURL($("#FILE_UPLOAD")[0].files[0]);
-			var a = $("<a>").attr("href", url).attr("download", "file.pdf file.doc file.xls file.hwp").appendTo("body");
-			a[0].click();
-			a.remove()
-		})
+	$("#BTN_FILE_DOWNLOAD").click(function(){
+		var url = URL.createObjectURL($("#FILE_UPLOAD")[0].files[0]);
+		var a = $("<a>").attr("href", url).attr("download", "file.pdf file.doc file.xls file.hwp").appendTo("body");
+		a[0].click();
+		a.remove()
 	})
-  
-//INPUT PAGE FUNCTION
-$(function(){
-	
+
+	//INPUT PAGE FUNCTION
 	$("#BTN_IMG_UPLOAD").click(function(){
 		let inputImg = $("#IMG_UPLOAD");
 		inputImg.click();
 	});
-// click VIDEO UPLOAD
-	$("#BTN_VIDEO_UPLOAD").click(function(){
-		var vid = $("#INPUT_VIDEO").val()
-		$("#CONTEXT_VIDEO").removeClass("imgNone")
-		$("#CONTEXT_VIDEO").attr("src", vid)
-		console.log(vid);
+	
+	// IMG PREVIEW
+	
 
-	})
-
-
-		// IMG PREVIEW
 	$("#IMG_UPLOAD").on("change", function(){
-		var file = this.files[0];
+		var file = this.files[0];	
 		var reader = new FileReader();
+		var imgCnt = $(`#CONTEXT_INPUT img`).length;
+
+		console.log("imgCnt:",imgCnt);
+		
 		reader.readAsDataURL(file);
 		reader.onload = function(e){
-			$("#IMAGE_PREVIEW").attr("src", e.target.result)
+			$('#CONTEXT_INPUT').append(`<img class="contextImg" style="width:40%" src='${e.target.result}' alt=''>`);
+			// $('#CONTEXT').append(`<img class="contextImg" style="width:40%" src='${e.target.result}' alt=''>`);
+			g_recentImgSrc.push(e.target.result);
 		}
 	});
+	
+	//UPLOAD BTN CLICK : INPUT FILE CLICK
+	$("#BTN_FILE_UPLOAD").click(function(){ $("#FILE_UPLOAD").click();});
 
-	$("#BTN_FILE_UPLOAD").click(function(){
-		let inputFile = $("#FILE_UPLOAD");
-		inputFile.click();
+	// click IMG INPUT	
+	var imgArray = [];
+	$('#IMG_UPLOAD').change(function() {
+		var upload_imgName = $(this).val().split('\\').pop();
+		$('#UPLOAD_IMG_NAME').text(upload_imgName); 
+		$("#IMAGE_PREVIEW").removeClass("imgNone")
+		imgArray.push(` ${$('#UPLOAD_IMG_NAME').text(upload_imgName).html()}`);
+		$('#IMG_ARRAY_TEXT').text(`${imgArray}`)
+		console.log(imgArray);
 	});
 
-	
+	//click VIDEO UPLOAD
+	var videoArray = [];
+	$("#BTN_VIDEO_UPLOAD").click(function(){
+		var vid = $("#INPUT_VIDEO").val()
+		console.log(vid);
+		videoArray.push(` ${vid}`)
+		$('#VIDEO_ARRAY_TEXT').text(` ${videoArray}`)
+		console.log(videoArray);
+		$("#INPUT_VIDEO").val('')
+		$("#CONTEXT_INPUT").append(`${vid}`)
+	})
 
 
 	goalRateBarControl(); //상품 모집달성률
@@ -234,6 +246,10 @@ $(function(){
 	// $("").css({height:`calc(100% / ${count})`});
 
 });
+
+  
+
+
 
 
 

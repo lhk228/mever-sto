@@ -279,8 +279,8 @@ position:relative;
 }
 /* CONTEXT IMG */
  .contextImg {
-	height: 25%; 
-	width: auto;
+	width: 40%;
+	height: auto;
 	margin: 5px;
  }
 

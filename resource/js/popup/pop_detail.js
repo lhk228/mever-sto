@@ -1,5 +1,5 @@
-
-
+let g_save_flow_obj; //save flow object
+let g_recentImgSrc = new Array(); //save image src
 
 $(document).on("click","#BTN_COLLAPSE",function(){
 	var target = $("#DIV_COLL_LOCATION");
@@ -37,25 +37,23 @@ function goalRateBarControl(cnt = 12458, totalCnt = 50000)
 
 }
 
-//플로우바 클릭 : 해당하는 페이지 오픈, 선택클래스 부여
+//플로우바 클릭 : 해당하는 페이지 오픈, 선택클래스 부여 
 $(document).on('click','.flow-bar',function(){
-	var fileNameSplit = $('#FILE_UPLOAD').val().split('\\').pop();
-	if($('#TITLE_INPUT').val().length !==0 && $('#CONTEXT_INPUT').text().length !==0){
-		$(".flow-bar").removeClass("selected");
-		$(this).toggleClass('selected');
-		$(`#READY_PAGE`).fadeIn().removeClass("hidden");
-		$(`.flow-list-container`).hide(0);
-		$(`#TITLE`).text($('#TITLE_INPUT').val());
-		$(`#CONTEXT`).text($('#CONTEXT_INPUT').text());
-		$(`#UPLOAD_READY`).text(fileNameSplit);
-		
-		console.log("hi ready")
-	}else{
+
+	if($('#TITLE_INPUT').val().length !==0 && $('#CONTEXT_INPUT').text().length !==0)
+	{
+		console.log("show flow Chart!")
+		viewFlowPost();
+	}
+	else
+	{
+		initFlowChartWrite();
 		$(".flow-bar").removeClass("selected");
 		$(this).toggleClass('selected');
 		$(`#INPUT_PAGE`).fadeIn().removeClass("hidden");
 		$(`.flow-list-container`).hide(0);
-		console.log("hi input")
+		
+		console.log("show edit or add chart!")
 	}
 
 })
@@ -79,21 +77,20 @@ $(document).on('click','.flow-list',function(e){
 	$(".flow-bar").eq(listNum).click();
 });
 
-let g_save_flow_obj;
+
 //click ADD LIST BUTTON
-$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){ return; initFlowChartWrite()});
+$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){initFlowChartWrite()});
 
 
 //click FLOW SAVE BUTTON
 $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
-	
 	let obj = makeFlowObejct();
 	let url = "/saveFlowPost";
 	if($('#TITLE_INPUT').val().length !== 0 && $('#CONTEXT_INPUT').text().length !== 0){
 	flowChartClose();
-	// g_save_flow_obj = obj;
+	g_save_flow_obj = obj;
 	makeFlowChartList(obj);
-	console.log(`makeFlowObejct :`,obj);
+	console.log(`makeFlowObejct:`,obj);
 	return;
 	api_post(url,obj);
 	}else{
@@ -104,6 +101,7 @@ $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 });
 // -- BTN_EDIT_FLOWCHART
 $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
+	$('#NEW_READY_PAGE').removeClass('imgNone')
 	var titleFlow =$("#TITLE").text();
 	var contextFlow = $("#CONTEXT").text();
 	$("#EDIT_TITLE_INPUT").val(titleFlow);
@@ -125,7 +123,7 @@ $(document).on('click','#BTN_NEWSAVE_FLOWCHART',function(){
 
 
 //닫기버튼 클릭 : 페이지 닫고 초기상태로
-$(document).on('click','.btn_close',function(){flowChartClose()});
+// $(document).on('click','.btn_close',function(){ flowChartClose()});
 
 //뒤로가기 클릭 : 플로우차트 닫고 상세설명페이지로
 $(document).on('click','#BTN_FLOW_LEFT',function(){
@@ -166,17 +164,29 @@ function makeFlowChartList(obj)
 function initFlowChartWrite()
 {
 	$('#TITLE_INPUT').val('');
-	$('#CONTEXT_INPUT').text('');
-	$('#UPLOAD_NAME').empty();
-	$('#IMAGE_PREVIEW').removeAttr("src");
+	$('#CONTEXT_INPUT').html('');
+	$('#UPLOAD_FILE_NAME').empty();
+	$('#UPLOAD_IMG_NAME').empty();
+	$('#IMAGE_PREVIEW').attr("src","");
 	$("#IMAGE_PREVIEW").removeClass("imgPreview")
 	$("#IMAGE_PREVIEW").addClass("imgNone")
 
 	console.log('add new item');
-
-	
 }
- 
+
+$(document).on('click', '#CLOSE_FLOW', function(){flowChartClose
+console.log('close flow');
+})
+
+$(document).on('click','#BTN_CLOSE_READY #CLOSE_FLOW',function(){flowChartClose()});
+
+
+ function flowPageClose(){
+	console.log('close');
+	$(`.flow-view-box`).hide(0);
+	$(`.flow-list-container`).fadeIn();
+	$(".flow-bar").removeClass("selected");
+ }
 function flowChartClose(){
 	console.log('close');
 	$(`.flow-view-box`).hide(0);
@@ -188,20 +198,52 @@ function flowChartClose(){
 function makeFlowObejct()
 {
 	let title = $(`#TITLE_INPUT`).val();
-	let context = $(`#CONTEXT_INPUT`).text();
+	//step1
+	imgArrays = [];
+	//step2
+	$(`#CONTEXT_INPUT`).find("img").remove();
+	
+	//step3 : div contenteditable 안에는 img가 없어야 한다
+	// imgArray.push($(`#UPLOAD_IMG_NAME`));
+	let imgCollect = $(`#IMG_ARRAY_TEXT`).text()
+	let context = $(`#CONTEXT_INPUT`).html();
+	context = replaceAll(context,'\n','');
+	context = replaceAll(context,'\t','');
+	let videoCollect = $(`#VIDEO_ARRAY_TEXT`).text()
+
+
 	let upload = $(`#FILE_UPLOAD`).val();
-	let obj = { title, context, upload };
+	let obj = { title, context, upload, imgCollect, videoCollect};
 
 	return obj;
 }
 
-//-- makeEditedFlowChart input Object
-function makeFlowObejct()
+//flowChart의 Post 보여주기
+function viewFlowPost()
 {
-	let title = $(`#TITLE_INPUT`).val();
-	let context = $(`#CONTEXT_INPUT`).text();
-	let upload = $(`#FILE_UPLOAD`).val();
-	let obj = { title, context, upload };
+	console.log("viewFlowPost > g_save_flow_obj :",g_save_flow_obj);
+	console.log("viewFlowPost > g_recentImgSrc :",g_recentImgSrc);
 
-	return obj;
+	let  { title, context, videoCollect, upload, imgCollect } = g_save_flow_obj;
+	$(".flow-bar").removeClass("selected");
+	$(this).toggleClass('selected');
+	$(`#READY_PAGE`).fadeIn().removeClass("hidden");
+	$(`.flow-list-container`).hide(0);
+
+	
+	$(`#TITLE`).text(title);
+	$(`#CONTEXT`).text(context);
+	$(`#UPLOAD_READY`).text(upload);
+
+	if(g_recentImgSrc .length > 0)
+	{
+		$("#CONTEXT").append(`<img src='${g_recentImgSrc[0]}'>`)
+	}
+	if(videoCollect.length > 0)
+	{
+		$("#CONTEXT").append(`${videoCollect[0]}`)
+	}
+
 }
+// NEW COPY PAGE
+
