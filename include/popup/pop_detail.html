@@ -97,6 +97,7 @@
       <!-- INPUT PAGE : 글 작성하기-->
 			<div id="INPUT_PAGE" class="flow-view-box hidden">
 				<i id="CLOSE_POST" class="fa-solid fa-xmark btn_close z-10" style="opacity:0;"></i>
+				<button></button>
 				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off" placeholder="제목을 입력해주세요">
 				<div class="post-menu">
           <div class="inputBtnBox flex-row-start">
@@ -130,7 +131,7 @@
 
 			<!--READY PAGE -->
 			<div id="READY_PAGE" class="flow-view-box hidden">
-				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
+				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;" read><br><br>
 				<p id="TITLE" class="title"></p>
 				<div contenteditable="true"  id="CONTEXT" class="contextInput"></div>
 				
@@ -242,8 +243,4 @@ $(function() {
 	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
-	// $(".flow-box").niceScroll({cursorwidth:'4px'})
-	
-	// $("").css({height:`calc(100% / ${count})`});
-
 </script>

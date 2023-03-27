@@ -112,9 +112,12 @@ $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
 	$(this).hide();
 });
 
+
+//! GLOBAL VARIABLE 사용해주세요
 $(document).on('click','#BTN_NEWSAVE_FLOWCHART',function(){
 	var editedTitle =$("#EDIT_TITLE_INPUT").val();
 	var editedContext =$("#EDIT_CONTEXT_INPUT").html()
+
 	$("#TITLE").text(editedTitle);
 	$("#CONTEXT").text(editedContext);
 	$("#EDIT_TITLE_INPUT, #EDIT_CONTEXT_INPUT, #BTN_NEWSAVE_FLOWCHART").hide();
