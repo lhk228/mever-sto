@@ -10,6 +10,7 @@ position:relative;
 #POPUP_DETAIL i.btn_close { top:0; }
 #POPUP_DETAIL .popup-main { overflow-y:scroll; padding:0; }
 
+#BTN_ADD_FLOW { color:#fff; background:var(--magentaG); border-radius:100%; padding:8px; font-size:20px; }
 #BTN_WRITE_FLOW { 
 	position:fixed;
 	right:12px;
@@ -163,14 +164,11 @@ position:relative;
 	bottom:0;
 }
 
-
 .chat-input {
 	height:60px;
 }
 
 .chat-input input { width:95%; height:80%; }
-
-
 
 /* 플로우 */
 .flow-box { height:100%; width:100%; }
@@ -228,7 +226,18 @@ position:relative;
 	height:calc(100% / 5);
 	border-bottom:1px solid rgba(0, 0, 0, 0.315); 
 	padding:4px;
+  display:flex;
+  flex-flow:column nowrap;
+  justify-content: center;
+  align-items: center;
 }
+
+.flow-list p {
+  width:100%;
+}
+
+.flow-list p.title { font-size:20px; padding-left:0; }
+.flow-list p.context { font-size:14px; }
 
 /* 플로우 뷰 박스 */
 .flow-view-box { 
@@ -254,7 +263,6 @@ position:relative;
 }
 
 
-
 .imgNone {
 	display: none;
 }
@@ -278,29 +286,47 @@ position:relative;
     caret-color: red;
 }
 /* CONTEXT IMG */
- .contextImg {
+.contextImg {
 	width: 40%;
 	height: auto;
 	margin: 5px;
- }
+}
 
+.post-menu {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
  /* INPUT BTN BOX */
-
- .inputBtnBox {
+.inputBtnBox {
 	display: flex; 
 	align-items: flex-end; 
 	padding: 10px;
- }
+}
 
- .inputBtnBox p {
+.inputBtnBox i {
+  font-size:30px;
+  margin:0 8px;
+}
+
+.inputBtnBox p {
 	font-size: 9px;
-	margin-left: 20px;
- }
+  height:100%;
+  display:flex;
+  align-items: center;
+  margin:0;
+}
 
  /*VIDEO INPUT  */
 
- .videoInput {
+.videoInput {
 	margin-left: 10px;
 	font-size: 12px;
 	padding: 8px 10px;
- }
+}
+
+
+/* POPUP_ADD_VIDEO : 동영상 추가 팝업 */
+#POPUP_ADD_VIDEO { width:100vw; height:100vh; position:fixed; top:0; background:rgba(0,0,0,0.8); }
+#POPUP_ADD_VIDEO .popup { background:#6700E7; width:80%; padding:8px; }
+#POPUP_ADD_VIDEO .popup input { width:100%; margin:8px 0; padding:5px; }

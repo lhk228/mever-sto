@@ -90,7 +90,7 @@
 
 <script>
 $(function(){
-	popupControl('show',`${POPUP_PATH}/pop_detail.html`);
+	// popupControl('show',`${POPUP_PATH}/pop_detail.html`);
 
 	$(`#TABLE_SEARCH_TBODY`).niceScroll({cursorwidth:'3px'});
 	// $("#TABLE_SEARCH_TBODY").easeScroll({
@@ -107,7 +107,7 @@ $(function(){
 	// });
 
 	$(`.category-list`).niceScroll({horizrailenabled: true, cursorwidth:'3px',  cursordragontouch: true, touchbehavior: true, emulatetouch:true, oneaxismousemode:'auto', });
-	// $(`.category-list`).getNiceScroll().resize()
+	$(`.category-list`).getNiceScroll().resize()
 
 	// makeSearchResult();
 });

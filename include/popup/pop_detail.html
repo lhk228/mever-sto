@@ -8,7 +8,7 @@
   <!-- popup-main : 팝업 메인영역 -->
 	<div class="popup-main flex-column-start">
 		<!-- detail-box : 상세정보 박스 -->
-		<div class="detail-box" style="display:none;">
+		<div class="detail-box" style="">
 			<div class="detail-header">
 				<div class="item-thumb square-box" style="background-image:url('resource/images/test_thumb.jpg'); width:25%;"></div>
 				<div class="item-detail" style="width:75%;">
@@ -77,72 +77,59 @@
 				</div>
 			</div>
 		</div>
+
 		<!-- flow-box : 진행보고 박스 -->
-		<div class="flow-box flex-column-start">
+		<div class="flow-box flex-column-start" style="display:none;">
 			<i id="BTN_FLOW_LEFT" class="fa-solid fa-arrow-left z-10"></i>
 			<div class="flow-bar-box">
 				<ul class="flow-bar-container">
 					<li class="flow-bar"></li>
 				</ul>
 			</div>
+
+      <!-- 일지 리스트 -->
 			<ul class="flow-list-container">
-				
 				<li class="flow-list" style="text-align: center">  
-					<button id="ADD_FLOW_LIST_BUTTON" class="btn btn_magenta w-52 mt-4 text-sm" >ADD</button>
+          <i id="BTN_ADD_FLOW" class="fa-solid fa-plus"></i>
 				</li>
 			</ul>
-
+      
+      <!-- INPUT PAGE : 글 작성하기-->
 			<div id="INPUT_PAGE" class="flow-view-box hidden">
-				<i id="CLOSE_FLOW" class="fa-solid fa-xmark btn_close z-10"></i>
-				<!-- INPUT PAGE -->
-				<p class="titleText title " >Title :</p>
-				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off">
-				<p class="context">Context :</p>
-				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput">
-					
-				</div> 
+				<i id="CLOSE_POST" class="fa-solid fa-xmark btn_close z-10" style="opacity:0;"></i>
+				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off" placeholder="제목을 입력해주세요">
+				<div class="post-menu">
+          <div class="inputBtnBox flex-row-start">
+            <i id="BTN_IMG_UPLOAD" class="fa-solid fa-image"></i>
+            <i id="BTN_VIDEO_UPLOAD" class="fa-sharp fa-solid fa-photo-film"></i>
+            <i id="BTN_FILE_UPLOAD" class="fa-solid fa-file"></i>
+            <p id="UPLOAD_FILE_NAME"></p>
+					</div>
+        </div>
+				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput"></div> 
 
 				<input type="file" id="IMG_UPLOAD" value="file name" placeholder="file name" accept="image/*" style="display: none;">
-				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp"  style="display: none;">
-			
-					<div class="inputBtnBox">
-						<button id="BTN_IMG_UPLOAD" class="btn btn_white">
-							Upload
-							<i class="fa-solid fa-image"></i>
-						</button>
-						<p id="UPLOAD_IMG_NAME"></p>
-					</div>
-					<div class="inputBtnBox">
-						<button  id="BTN_FILE_UPLOAD" class="btn btn_white">
-							Upload
-							<i class="fa-solid fa-file"></i>
-						</button>
-						
-						<p id="UPLOAD_FILE_NAME"></p>
-					</div>
-					<div class="inputBtnBox">
-						<button  id="BTN_VIDEO_UPLOAD" class="btn btn_white">
-							Upload
-							<i class="fa-sharp fa-solid fa-photo-film"></i>
-						</button>
-						<input id="INPUT_VIDEO" class="videoInput" type="text" placeholder="https://www.youtube.com">
-					</div>
+				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp" style="display: none;">
 					<p id="IMG_ARRAY_TEXT" style="display: none;"></p>
 					<p id="VIDEO_ARRAY_TEXT" style="display: none;"></p>
-				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Save</button>
-				
+				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">저장하기</button>
 			</div>
 
-			
-
-
+      <!-- POPUP_ADD_VIDEO : 동영상 추가팝업 -->
+      <div id="POPUP_ADD_VIDEO" class="popup-container flex-row-center" style="display:none;">
+        <div class="popup video-popup" style="">
+          <div class="popup-header">동영상 추가하기 <i class="fa-solid fa-xmark btn_popup_close z-10"></i></div>
+          <div class="popup-main">
+            <input id="INPUT_VIDEO_LINK" type="text" placeholder="동영상 링크를 넣어주세요">
+          </div>
+          <div class="popup-bottom justify-end pt-0">
+            <button id="BTN_VIDEO_CONFIRM" class="btn btn_magenta w-full h-full">확인</button>
+          </div>
+        </div>
+      </div>
 
 			<!--READY PAGE -->
-
 			<div id="READY_PAGE" class="flow-view-box hidden">
-			
-				<i id="BTN_CLOSE_READY" class="fa-solid fa-xmark btn_close z-10"></i>
-				
 				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;"><br><br>
 				<p id="TITLE" class="title"></p>
 				<div contenteditable="true"  id="CONTEXT" class="contextInput"></div>
@@ -152,8 +139,8 @@
 				</div>
 				<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
 				<p id="UPLOAD_READY" class="context"></p>
-				<button id="BTN_EDIT_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">Edit</button>
-				<button id="BTN_NEWSAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display: none;">Save</button>
+				<button id="BTN_EDIT_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display:none;">수정</button>
+				<button id="BTN_NEWSAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display: none;">저장하기</button>
 			</div>
 			
 			<i id="BTN_WRITE_FLOW" class="fa-solid fa-pen-to-square"></i>
@@ -163,9 +150,8 @@
 </div>
 
 <script>
-
 $(function() {
-	// click FILE INPUT	
+// click FILE INPUT
 	$('#FILE_UPLOAD').change(function(){
 		var upload_fileName = $(this).val().split('\\').pop();
 		$('#UPLOAD_FILE_NAME').text(upload_fileName); 
@@ -186,8 +172,6 @@ $(function() {
 	});
 	
 	// IMG PREVIEW
-	
-
 	$("#IMG_UPLOAD").on("change", function(){
 		var file = this.files[0];	
 		var reader = new FileReader();
@@ -198,7 +182,6 @@ $(function() {
 		reader.readAsDataURL(file);
 		reader.onload = function(e){
 			$('#CONTEXT_INPUT').append(`<img class="contextImg" style="width:40%" src='${e.target.result}' alt=''>`);
-			// $('#CONTEXT').append(`<img class="contextImg" style="width:40%" src='${e.target.result}' alt=''>`);
 			g_recentImgSrc.push(e.target.result);
 		}
 	});
@@ -219,16 +202,34 @@ $(function() {
 
 	//click VIDEO UPLOAD
 	var videoArray = [];
+
+  //영상추가버튼 클릭 : 영상추가팝업
 	$("#BTN_VIDEO_UPLOAD").click(function(){
-		var vid = $("#INPUT_VIDEO").val()
-		console.log(vid);
-		videoArray.push(` ${vid}`)
-		$('#VIDEO_ARRAY_TEXT').text(` ${videoArray}`)
-		console.log(videoArray);
-		$("#INPUT_VIDEO").val('')
-		$("#CONTEXT_INPUT").append(`${vid}`)
+    var popup = $("#POPUP_ADD_VIDEO");
+    popup.show();
+  });
+
+  //영상추가팝업 닫기
+	$("#POPUP_ADD_VIDEO .btn_popup_close").click(function(){
+    $("#POPUP_ADD_VIDEO").fadeOut();
+		return false;
+	});
+
+  //동영상링크 확인버튼 : 본문에 영상삽입
+  $("#BTN_VIDEO_CONFIRM").click(function(){
+
+    let link = $("#INPUT_VIDEO_LINK").val();
+
+    //영상목록에 링크추가
+    videoArray.push(` ${link}`)
+		console.log("videoArray :",videoArray);
+
+		$("#INPUT_VIDEO_LINK").val('')
+		$("#CONTEXT_INPUT").append(`${link}`)
+    $("#POPUP_ADD_VIDEO").fadeOut();
 	})
 
+  });
 
 	goalRateBarControl(); //상품 모집달성률
 
@@ -244,13 +245,5 @@ $(function() {
 	// $(".flow-box").niceScroll({cursorwidth:'4px'})
 	
 	// $("").css({height:`calc(100% / ${count})`});
-
-});
-
-  
-
-
-
-
 
 </script>

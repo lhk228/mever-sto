@@ -52,6 +52,7 @@ $(document).ready(function(){
 //-- 개발용 redLine뷰
 let redLine = false;
 function devLine(v){
+  console.log("hi");
 	if(v == "on")
 	{
 		$("*").css({outline:"1px solid red"});

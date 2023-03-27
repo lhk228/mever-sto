@@ -50,6 +50,8 @@ $(function(){
 		if(inputCount < 6){ $(this).before(`<p><input type="text" placeholder='안내문구를 입력해주세요'><button class="btn_delete">+</button></p>`); }
 		else { customAlert("최대 5개까지 추가 가능합니다")}
 		
+    $("#MARKETING_PAGE").getNiceScroll().resize();
+
 	})
 
 	//입력창 추가하기(textarea)
@@ -63,6 +65,7 @@ $(function(){
 		}
 		else { $(`.consult-textarea`).remove(); $(this).text("입력창 추가하기(여러줄)") }
 		
+    $("#MARKETING_PAGE").getNiceScroll().resize();
 	})
 
 	//삭제버튼 클릭

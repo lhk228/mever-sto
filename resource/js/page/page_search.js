@@ -36,6 +36,7 @@ $(document).on('click','#TABLE_SEARCH_TBODY .table_row',function(e){
 $(document).on('click','#BTN_FLOWCHART',function(){
 	showFlowChart();
 })
+
 // 플로우차트 보여준다
 function showFlowChart()
 {

@@ -79,7 +79,7 @@ $(document).on('click','.flow-list',function(e){
 
 
 //click ADD LIST BUTTON
-$(document).on('click','#ADD_FLOW_LIST_BUTTON',function(){initFlowChartWrite()});
+$(document).on('click','#BTN_ADD_FLOW',function(){initFlowChartWrite()});
 
 
 //click FLOW SAVE BUTTON
@@ -99,6 +99,7 @@ $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 	}
 	
 });
+
 // -- BTN_EDIT_FLOWCHART
 $(document).on('click','#BTN_EDIT_FLOWCHART',function(){
 	$('#NEW_READY_PAGE').removeClass('imgNone')
@@ -132,19 +133,38 @@ $(document).on('click','#BTN_FLOW_LEFT',function(){
 	let flowDetail 	= $(`.flow-view-box`);
 	let flowDisplay = flowBox.css("display");
 	let detailDisplay = flowDetail.css("display");
+  let flowList = $(".flow-list-container");
+  let readyDisplay = $("#READY_PAGE").css("display");
+  
+  if(readyDisplay != "none")
+  {
+    flowDetail.hide(0);
+    flowList.fadeIn();
+    return;
+  }
 
-	
+  if(detailDisplay == "block")
+  {
+    flowDetail.hide(0);
+    flowList.fadeIn();
+    return;
+  }
+
+
 	if(flowDisplay == "flex")
 	{
 		flowBox.hide(0);
 		detailBox.fadeIn();
+    return;
 	}
+
+
 })
 
 $(document).on('click','#BTN_WRITE_FLOW',function(){
 	console.log('작성모드')
 })
- 
+
 
 //-- make flow list
 function makeFlowChartList(obj)
@@ -154,7 +174,7 @@ function makeFlowChartList(obj)
 		`
 		<li class="flow-list">
 			<p class="title">${title}</p>
-			<p class="context">${context}</p>
+			<p class="context">클릭하여 글 확인하기</p>
 		</li>
 		`;
 	$(".flow-list-container").prepend(li);
@@ -174,19 +194,20 @@ function initFlowChartWrite()
 	console.log('add new item');
 }
 
-$(document).on('click', '#CLOSE_FLOW', function(){flowChartClose
+$(document).on('click', '#CLOSE_POST', function(){flowChartClose
 console.log('close flow');
 })
 
-$(document).on('click','#BTN_CLOSE_READY #CLOSE_FLOW',function(){flowChartClose()});
+$(document).on('click','#BTN_CLOSE_READY #CLOSE_POST',function(){flowChartClose()});
 
 
- function flowPageClose(){
+function flowPageClose(){
 	console.log('close');
 	$(`.flow-view-box`).hide(0);
 	$(`.flow-list-container`).fadeIn();
 	$(".flow-bar").removeClass("selected");
- }
+}
+
 function flowChartClose(){
 	console.log('close');
 	$(`.flow-view-box`).hide(0);
