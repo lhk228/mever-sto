@@ -1,5 +1,10 @@
 let g_save_flow_obj; //save flow object
 let g_recentImgSrc = new Array(); //save image src
+let g_recentFileSrc = new Array(); //save image src
+
+let g_imgArray = [];
+let g_fileArray = [];
+let g_videoArray = [];
 
 $(document).on("click","#BTN_COLLAPSE",function(){
 	var target = $("#DIV_COLL_LOCATION");
@@ -42,6 +47,7 @@ $(document).on('click','.flow-bar',function(){
 
 	if($('#TITLE_INPUT').val().length !==0 && $('#CONTEXT_INPUT').text().length !==0)
 	{
+
 		console.log("show flow Chart!")
 		viewFlowPost();
 	}
@@ -50,7 +56,7 @@ $(document).on('click','.flow-bar',function(){
 		initFlowChartWrite();
 		$(".flow-bar").removeClass("selected");
 		$(this).toggleClass('selected');
-		$(`#INPUT_PAGE`).fadeIn().removeClass("hidden");
+		$(`#POST_PAGE`).fadeIn().removeClass("hidden");
 		$(`.flow-list-container`).hide(0);
 		
 		console.log("show edit or add chart!")
@@ -90,7 +96,8 @@ $(document).on('click','#BTN_SAVE_FLOWCHART',function(){
 	flowChartClose();
 	g_save_flow_obj = obj;
 	makeFlowChartList(obj);
-	console.log(`makeFlowObejct:`,obj);
+	// console.log(`makeFlowObejct:`,obj);
+	console.log(`makeFlowObejct:`,g_save_flow_obj);
 	return;
 	api_post(url,obj);
 	}else{
@@ -222,22 +229,11 @@ function flowChartClose(){
 function makeFlowObejct()
 {
 	let title = $(`#TITLE_INPUT`).val();
-	//step1
-	imgArrays = [];
-	//step2
-	$(`#CONTEXT_INPUT`).find("img").remove();
-	
-	//step3 : div contenteditable 안에는 img가 없어야 한다
-	// imgArray.push($(`#UPLOAD_IMG_NAME`));
-	let imgCollect = $(`#IMG_ARRAY_TEXT`).text()
 	let context = $(`#CONTEXT_INPUT`).html();
 	context = replaceAll(context,'\n','');
 	context = replaceAll(context,'\t','');
-	let videoCollect = $(`#VIDEO_ARRAY_TEXT`).text()
-
-
-	let upload = $(`#FILE_UPLOAD`).val();
-	let obj = { title, context, upload, imgCollect, videoCollect};
+	
+	let obj = { title, context, g_imgArray, g_videoArray, g_fileArray};
 
 	return obj;
 }
@@ -245,6 +241,21 @@ function makeFlowObejct()
 //flowChart의 Post 보여주기
 function viewFlowPost()
 {
+	let memberType = checkMemberType();
+
+	console.log(memberType);
+	switch(memberType)
+	{
+		case "viewer":
+			$("#TITLE_INPUT").css({pointerEvents:"none"});
+			$("#CONTEXT_INPUT").removeAttr('contenteditable');
+		case "manager":
+			$("#TITLE_INPUT").css({pointerEvents:"auto"});
+			$("#CONTEXT_INPUT").attr('contenteditable',true);
+	}
+
+	$("#POST_PAGE").show()
+
 	console.log("viewFlowPost > g_save_flow_obj :",g_save_flow_obj);
 	console.log("viewFlowPost > g_recentImgSrc :",g_recentImgSrc);
 
@@ -263,11 +274,24 @@ function viewFlowPost()
 	{
 		$("#CONTEXT").append(`<img src='${g_recentImgSrc[0]}'>`)
 	}
-	if(videoCollect.length > 0)
-	{
-		$("#CONTEXT").append(`${videoCollect[0]}`)
-	}
+	// if(videoCollect.length > 0)
+	// {
+	// 	$("#CONTEXT").append(`${videoCollect[0]}`)
+	// }
 
 }
-// NEW COPY PAGE
+
+//회원 타입 확인
+function checkMemberType()
+{
+	//1 step api check
+
+	//2 return member type
+
+	// ex) type : manager, member, seller.. 
+	// let type = "manager";
+	let type = "viewer"
+	return type;
+
+}
 

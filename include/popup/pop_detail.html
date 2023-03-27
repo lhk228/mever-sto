@@ -94,8 +94,8 @@
 				</li>
 			</ul>
       
-      <!-- INPUT PAGE : 글 작성하기-->
-			<div id="INPUT_PAGE" class="flow-view-box hidden">
+      <!-- POST_PAGE : 글 작성하기-->
+			<div id="POST_PAGE" class="flow-view-box hidden">
 				<i id="CLOSE_POST" class="fa-solid fa-xmark btn_close z-10" style="opacity:0;"></i>
 				<button></button>
 				<input class="inputTitle" id="TITLE_INPUT" type="text" autocomplete="off" placeholder="제목을 입력해주세요">
@@ -108,11 +108,8 @@
 					</div>
         </div>
 				<div contenteditable="true" id="CONTEXT_INPUT" class="contextInput"></div> 
-
 				<input type="file" id="IMG_UPLOAD" value="file name" placeholder="file name" accept="image/*" style="display: none;">
 				<input type="file" id="FILE_UPLOAD" value="file name" placeholder="file name" accept=".doc,.xls,.ppt,.pdf,.hwp" style="display: none;">
-					<p id="IMG_ARRAY_TEXT" style="display: none;"></p>
-					<p id="VIDEO_ARRAY_TEXT" style="display: none;"></p>
 				<button id="BTN_SAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm">저장하기</button>
 			</div>
 
@@ -128,22 +125,6 @@
           </div>
         </div>
       </div>
-
-			<!--READY PAGE -->
-			<div id="READY_PAGE" class="flow-view-box hidden">
-				<input type="text" id="EDIT_TITLE_INPUT"  style="display: none;" read><br><br>
-				<p id="TITLE" class="title"></p>
-				<div contenteditable="true"  id="CONTEXT" class="contextInput"></div>
-				
-				<div class="imgBox">
-					<!-- <img id="IMAGE_PREVIEW" src="" alt=""> -->
-				</div>
-				<p style="margin: 0 0 0 30px ;" id="UPLOAD_NAME"></p>
-				<p id="UPLOAD_READY" class="context"></p>
-				<button id="BTN_EDIT_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display:none;">수정</button>
-				<button id="BTN_NEWSAVE_FLOWCHART" class="btn btn_magenta w-52 mt-4 text-sm" style="display: none;">저장하기</button>
-			</div>
-			
 			<i id="BTN_WRITE_FLOW" class="fa-solid fa-pen-to-square"></i>
 		</div>
   <!-- popup-main : 팝업 메인영역 END -->
@@ -155,7 +136,9 @@ $(function() {
 // click FILE INPUT
 	$('#FILE_UPLOAD').change(function(){
 		var upload_fileName = $(this).val().split('\\').pop();
-		$('#UPLOAD_FILE_NAME').text(upload_fileName); 
+		g_fileArray.push(` ${event.target.value}`);
+		$('#UPLOAD_FILE_NAME').text(upload_fileName);
+		console.log(g_fileArray); 
 	})
 
 	// click FILE DOWNLOAD
@@ -165,6 +148,9 @@ $(function() {
 		a[0].click();
 		a.remove()
 	})
+
+	//UPLOAD BTN CLICK : INPUT FILE CLICK
+	$("#BTN_FILE_UPLOAD").click(function(){ $("#FILE_UPLOAD").click();});
 
 	//INPUT PAGE FUNCTION
 	$("#BTN_IMG_UPLOAD").click(function(){
@@ -187,22 +173,20 @@ $(function() {
 		}
 	});
 	
-	//UPLOAD BTN CLICK : INPUT FILE CLICK
-	$("#BTN_FILE_UPLOAD").click(function(){ $("#FILE_UPLOAD").click();});
 
 	// click IMG INPUT	
-	var imgArray = [];
+	
 	$('#IMG_UPLOAD').change(function() {
 		var upload_imgName = $(this).val().split('\\').pop();
 		$('#UPLOAD_IMG_NAME').text(upload_imgName); 
 		$("#IMAGE_PREVIEW").removeClass("imgNone")
-		imgArray.push(` ${$('#UPLOAD_IMG_NAME').text(upload_imgName).html()}`);
-		$('#IMG_ARRAY_TEXT').text(`${imgArray}`)
-		console.log(imgArray);
+		g_imgArray.push(` ${event.target.value}`);
+		// $('#IMG_ARRAY_TEXT').text(`${imgArray}`)
+		console.log(g_imgArray);
+		
 	});
 
 	//click VIDEO UPLOAD
-	var videoArray = [];
 
   //영상추가버튼 클릭 : 영상추가팝업
 	$("#BTN_VIDEO_UPLOAD").click(function(){
@@ -222,8 +206,8 @@ $(function() {
     let link = $("#INPUT_VIDEO_LINK").val();
 
     //영상목록에 링크추가
-    videoArray.push(` ${link}`)
-		console.log("videoArray :",videoArray);
+    g_videoArray.push(` ${link}`)
+		console.log("videoArray :",g_videoArray);
 
 		$("#INPUT_VIDEO_LINK").val('')
 		$("#CONTEXT_INPUT").append(`${link}`)
@@ -231,6 +215,9 @@ $(function() {
 	})
 
   });
+
+
+
 
 	goalRateBarControl(); //상품 모집달성률
 
