@@ -110,7 +110,6 @@
 				<li class="p-2"><a href="#/join">회원가입</a></li>
 				<li class="p-2"><a href="#/search">상품목록</a></li>
 				<li class="p-2"><a href="#/rank">순위</a></li>
-				<li class="p-2"><a href="#/marketing">마케팅</a></li>
 				<li class="p-2"><a href="#/project">원페이지생성(임시)</a></li>
 			</ul>
 		</nav>
@@ -137,7 +136,7 @@
 <section id="PAGE_VIEW" class="fixed w-full bottom-16 flex-column-center" style="height:calc(100% - 120px);"></section>
 
 <!-- POPUP_VIEW : 팝업 표시되는곳 -->
-<section id="POPUP_VIEW" class="fixed w-screen h-full z-40 hidden flex-row-center" style="display:none!important;">
+<section id="POPUP_VIEW" class="fixed w-screen h-full z-40 hidden flex-row-center" style="display:none;">
 </section>
 
 <!-- CUSTOM_ALERT   -->
@@ -151,5 +150,10 @@
 <!-- <section id="CAMERA_VIEW"></section> -->
 
 </section>
+<script>
+$(function(){
+	$("#PAGE_VIEW").niceScroll();
+});
+</script>
 </body>
 </html>

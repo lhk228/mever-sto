@@ -23,9 +23,9 @@
 
 <script>
 $(function(){
-	$(`.project-card`).not(`.btn_white`).click(function (){
+	$(`.project-card`).click(function (e){
 		let page = $(this).attr('page');
-		location.href=`/#/${page}`;
+		if(e.target.nodeName != "BUTTON"){ location.href=`/#/${page}` }
 	});
 });
 </script>
