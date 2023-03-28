@@ -18,7 +18,7 @@ var app = Sammy(function () {
 	this.get("#/rank", function () { pageTransition(`${PAGE_PATH}rank.html`); });
 
 	//원페이지 발행서비스
-	this.get("#/marketing", function () { pageTransition(`${PAGE_PATH}marketing.html`); });
+	this.get("#/marketing", function () { pageTransition(`${PAGE_PATH}marketing.html`);});
 	
 	//원페이지 발행서비스2
 	this.get("#/project", function () { pageTransition(`${PAGE_PATH}project.html`); });

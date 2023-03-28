@@ -1,5 +1,7 @@
-#MARKETING_PAGE { max-width:640px; width:100%; height:100%; padding:0 12px; }
-#MARKETING_PAGE input { padding:5px; }
+#MARKETING_PAGE { width:100%; height:100%; padding:0 12px; }
+#MARKETING_PAGE #LANDING_INPUT input { padding:5px; }
+
+#MARKETING_PAGE > div { width:50%; height:100%; }
 .header-input { width:100%; padding:8px; margin:12px 0; }
 .canvas-box { width:100%; background:rgba(255,255,255,0.1); border-radius:10px; cursor:pointer; transition:.3s; }
 .canvas-box:hover { opacity:0.8; }
@@ -28,4 +30,115 @@
 #MARKETING_PAGE .popup { background:#6700E7; width:80%; }
 #MARKETING_PAGE .popup input { width:100%; }
 
+.landingResult {
 
+  
+}
+.landingResultContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(246, 246, 246);
+  border: 2px solid grey;
+  width: 70%;
+  height: 65vh;
+  margin:10rem auto;
+  color: #000;
+  box-shadow: 3px 3px 3px 3px grey;
+}
+
+.mainBox {
+  margin: 10px 30px;
+  text-align: center; 
+}
+
+.suptitle {
+  font-size: 2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  color: rgb(169, 169, 169);  
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.title-bold {
+  font-size: 6rem;
+  line-height: 80%
+}
+
+.iframe-box {
+  /* border: 2px solid black; */
+  width: 50rem;
+  height: 35vh;
+  margin-top: 20px;
+  text-align: start;
+  /* position: relative; */
+}
+
+.iframe-box iframe {
+  /* position: absolute; */
+  width: 100%;
+  height: 100%;
+}
+
+.instruct-text {
+  margin: 1rem 0;
+  font-size: 27px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(84, 84, 84);
+}
+
+.access-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 1rem 1rem 1rem;
+  background: rgb(34, 33, 99);
+  width: 100%;
+  height: 100%;
+}
+
+.input-box {
+  background: #fff;
+  height: 2.4rem;
+  width: 30%;
+}
+
+.input {
+  width: 90%;
+  height: 100%;
+  border: none;
+  padding: 0 5px;
+  font-size: 1.2rem;
+  background: #fff;
+}
+.input:focus{
+  outline: none;
+}
+
+.btn-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  height: 2.4rem;
+  width: 30%;
+  gap: 10px;
+  background: rgb(226, 221, 213);
+}
+
+.checkbox {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.btn-access {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
