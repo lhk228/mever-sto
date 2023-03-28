@@ -20,6 +20,18 @@ var app = Sammy(function () {
 	//원페이지 발행서비스
 	this.get("#/marketing", function () { pageTransition(`${PAGE_PATH}marketing.html`); });
 	
+	//원페이지 발행서비스2
+	this.get("#/project", function () { pageTransition(`${PAGE_PATH}project.html`); });
+
+	//원페이지 - 웨비나
+	this.get("#/webina", function () { pageTransition(`${PAGE_PATH}webina.html`); });
+	
+	//원페이지 - 컨설트
+	this.get("#/consult", function () { pageTransition(`${PAGE_PATH}consult.html`); });
+	
+	//원페이지 - 챌린지
+	this.get("#/challenge", function () { pageTransition(`${PAGE_PATH}challenge.html`); });
+	
 	//404
 	this.notFound = function (verb, path) { $("#PAGE_VIEW").html("404, 페이지 못찾음"); };
 });
