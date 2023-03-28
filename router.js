@@ -32,6 +32,9 @@ var app = Sammy(function () {
 	//원페이지 - 챌린지
 	this.get("#/challenge", function () { pageTransition(`${PAGE_PATH}challenge.html`); });
 	
+	//원페이지 - 결제
+	this.get("#/payment", function () { pageTransition(`${PAGE_PATH}payment.html`); });
+	
 	//404
 	this.notFound = function (verb, path) { $("#PAGE_VIEW").html("404, 페이지 못찾음"); };
 });

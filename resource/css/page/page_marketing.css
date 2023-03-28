@@ -41,8 +41,8 @@
   background: rgb(246, 246, 246);
   border: 2px solid grey;
   width: 70%;
-  height: 65vh;
-  margin:10rem auto;
+  min-height: 45vh;
+  margin:6rem auto;
   color: #000;
   box-shadow: 3px 3px 3px 3px grey;
 }
@@ -69,16 +69,13 @@
 }
 
 .iframe-box {
-  /* border: 2px solid black; */
   width: 50rem;
   height: 35vh;
   margin-top: 20px;
   text-align: start;
-  /* position: relative; */
 }
 
-.iframe-box iframe {
-  /* position: absolute; */
+iframe {
   width: 100%;
   height: 100%;
 }
@@ -142,3 +139,7 @@
   align-items: center;
   gap: 10px;
 }
+
+
+
+

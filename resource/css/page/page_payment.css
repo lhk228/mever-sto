@@ -1,2 +1,45 @@
 /* PAYMENT_PAGE : 결제페이지 CSS */
 #PAYMENT_PAGE {}
+/*  PAYMENT FIRST PAGE */
+
+.paymentFirstPage {
+  margin: 0 auto;
+  width: 30%;
+  height: 60vh;
+  padding: 10px;
+  background: rgba(255,255,255,0.1);
+  border-radius:10px;
+}
+
+.titleBox {
+  padding: 10px 60px;
+  text-align: center;
+  background: indigo;
+}
+
+.pageChoiceBox {
+  display: flex;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.pageChoice {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  background: #291f4e;
+  padding: 20px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.activePage {
+  background: #402ee43a;
+  padding-top: ;
+}
+
+.pageNum {
+  padding: 10px;
+  border-radius: 50%;
+  background: indigo;
+  margin-right: 10px;
+}
