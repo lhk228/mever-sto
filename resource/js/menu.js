@@ -9,6 +9,7 @@ $(function(){
 		$(`#MENU`).slideToggle();
 	})
 
+	//메뉴클릭 => 모달클릭(닫기)
 	$("#MENU li").click(function(){ $("#MODAL").click(); });
 
 	//네비게이션 버튼 : 팝업or페이지 불러오기
@@ -30,7 +31,17 @@ $(function(){
 		
 	});
 
+	//북마크 클릭 : 북마크된것만 남긴다
+	$(document).on(`click`,`#BTN_BOOKMARK`,function(){
+		$("#TABLE_SEARCH_TBODY .item-bookmark.fa-regular").parents('.table_row').hide();
+	});
+
+	//리스트 클릭 : 모든 리스트 보여준다
+	$(document).on(`click`,`#BTN_ALLIST`,function(){
+		$("#TABLE_SEARCH_TBODY .table_row").show();
+	});
 	
+	//거래소로
 	$("#GO_MARKET").click(function(){
 		location.href = 'https://mever.me/sto/market';
 	});

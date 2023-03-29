@@ -177,5 +177,5 @@ $(document).on(`click`,`#INIT_STEP_03`,function(){
 
 //주문하기 버튼클릭
 $(document).on(`click`,`#BTN_STEP3_SUBMIT`,function(){
-	location.href="/#/payment";
+	location.href="#/payment";
 });
